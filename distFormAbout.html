@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="navbar"></div>
+    <script>
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+    
+    <a href="index.html"><button class="button-29" role="button">Home</button></a>
+    <br>
+    <br>
+
+    <div class="ptgMain">
+
+
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+              <div class="flip-card-front">
+                  <img src="pythagoras.jpg" alt="Pythagoras">
+                  <p class="pyth">Pythagoras</p>
+              </div>
+              <div class="flip-card-back">
+                  <h1>Pythagoras</h1>
+                  <p class="description">Greek philosopher and mathematician credited with the Pythagorean Theorem.</p>
+                  <p class="wikiLink"><a href="https://en.wikipedia.org/wiki/Pythagoras">Wikipedia</a></p>
+              </div>
+          </div>
+        </div>
+
+
+
+        <div class="mainTextAbt">
+          <h1>Distance Formula</h1>
+          <p>
+            The distance formula uses the Pythagorean Theorem to measure the distance of 2 points on a graph. The Pythagorean Theorum was discovered by Pythagoras and so was the distance formula.
+          </p>
+        </div>
+
+
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+              <div class="flip-card-front">
+                  <img src="distForm.png" alt="Equation">
+                  <p class="pyth">Dist Formula</p>
+              </div>
+              <div class="flip-card-back">
+                  <h1>Dist Formula</h1>
+                  <p class="description">Used to find the distance of 2 points on a graph.</p>
+                  <p class="wikiLink"><a href="https://www.learner.com/blog/what-is-the-distance-formula-in-geometry">Learner.com</a></p>
+              </div>
+          </div>
+        </div>
+
+    </div>
+    
+    
+
+</body>
+</html>

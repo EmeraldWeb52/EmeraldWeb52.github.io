@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="math.css" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Triangle Side Length Finder</title>
+
+</head>
+
+    
+<body>
+    <div id="navbar"></div>
+    <script>
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+    <a href="index.html"><button class="button-29" role="button">Home</button></a>
+    <h1>This uses the Pythagorean Theorum to calculate the unknow side of a right triangle</h1>
+    <p><a class="learnMore" href="ptgAbout.html">Learn More</a></p>
+
+    <nav class="calculator">
+        <input type="number" placeholder="Length of side A" id="sideA">
+
+        <input type="number" placeholder="Length of side B" id="sideB">
+
+        <input type="number" placeholder="Length of side C" id="sideC">
+
+        <p><span id="missingSide">Enter values to calculate</span></p>
+    </nav>
+    <script src="triangleSolver.js"></script>
+</body>
+</html>

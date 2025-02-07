@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="navbar"></div>
+    <script>
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+    
+    <a href="index.html"><button class="button-29" role="button">Home</button></a>
+    <br>
+    <br>
+
+    <div class="ptgMain">
+
+
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+              <div class="flip-card-front">
+                  <img src="pythagoras.jpg" alt="Pythagoras">
+                  <p class="pyth">Pythagoras</p>
+              </div>
+              <div class="flip-card-back">
+                  <h1>Pythagoras</h1>
+                  <p class="description">Greek philosopher and mathematician credited with the Pythagorean Theorem.</p>
+                  <p class="wikiLink"><a href="https://en.wikipedia.org/wiki/Pythagoras">Wikipedia</a></p>
+              </div>
+          </div>
+        </div>
+
+
+
+        <div class="mainTextAbt">
+          <h1>Pythagorean Theorem</h1>
+          <p>
+            The Pythagorean Theorem is one of the most well-known formulas in math. It states that for any right triangle, the sum of the squares of sides A and B equals the square of the hypotenuse (side C). The theorem is named after Pythagoras, though it was known to many cultures before his time. The theorem has been proven using various methods.
+          </p>
+        </div>
+
+
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+              <div class="flip-card-front">
+                  <img src="pythagoreanTheorum.jpg" alt="Equation">
+                  <p class="pyth">a² + b² = c²</p>
+              </div>
+              <div class="flip-card-back">
+                  <h1>Pythagorean</h1>
+                  <p class="description">One of the most fundamental and well-known mathematical formulas.</p>
+                  <p class="wikiLink"><a href="https://en.wikipedia.org/wiki/Pythagorean_theorem">Wikipedia</a></p>
+              </div>
+          </div>
+        </div>
+
+    </div>
+    
+    
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="math.css" type="text/css" rel="stylesheet">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Distance Formula</title>
+</head>
+
+
+<body>
+    <div id="navbar"></div>
+    <script>
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+    <a href="index.html"><button class="button-29" role="button">Home</button></a>
+    <h1>This uses the distance formula to calculate the distance between 2 points on a graph</h1>
+    <p><a class="learnMore" href="distFormAbout.html">Learn More</a></p>
+    <div class="calculator">
+
+        <input type="number" placeholder="X input for point 1" id="numberInput1">
+    
+        <input type="number" placeholder="Y input for point 1" id="numberInput2">
+    
+        <input type="number" placeholder="X input for point 2" id="numberInput3">
+    
+        <input type="number" placeholder="Y input for point 2" id="numberInput4">
+
+        <p>The distance is: <span id="displayValue">0</span></p>
+    <div>
+    <script src="distForm.js"></script>
+</body>
+</html>

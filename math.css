@@ -1,0 +1,121 @@
+input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+         html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, rgb(147, 142, 255), #5f59fc);
+            background-attachment: fixed;
+        }  
+        
+        .button-29 {
+		      z-index: 1050;
+          align-items: center;
+          appearance: none;
+           background: radial-gradient(100% 100% at 100% 0, #5adaff 0%, #5468ff 100%);
+          border: 0;
+          border-radius: 6px;
+          box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+          box-sizing: border-box;
+          color: #fff;
+          cursor: pointer;
+          display: inline-flex;
+          font-family: "JetBrains Mono",monospace;
+          height: 48px;
+          justify-content: center;
+          line-height: 1;
+          list-style: none;
+          overflow: hidden;
+          padding-left: 16px;
+          padding-right: 16px;
+          margin: 5px;
+          position: relative;
+          text-align: left;
+          text-decoration: none;
+          transition: box-shadow .15s,transform .15s,background .3s ease-in-out;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          white-space: nowrap;
+          will-change: box-shadow,transform;
+          font-size: 18px;
+        }
+        
+        .button-29:focus {
+          box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+        }
+        
+        .button-29:hover {
+          box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+          transform: translateY(-2px);
+        }
+        
+        .button-29:active {
+          box-shadow: #3c4fe0 0 3px 7px inset;
+          transform: translateY(2px);
+        }
+        .calculator{
+          transform: translateY(60px);
+        }
+        .learnMore{
+          text-align: center;
+          font-size: 15px;
+        }
+
+        
+        /* Firefox */
+        input[type=number] {
+          -moz-appearance: textfield;
+          appearance: textfield;
+        }
+        body {
+            font-family: sans-serif;
+        }
+        
+        label, input {
+            text-align: left;
+            display: block;
+            margin: 10px auto;
+            font-size: 20px;
+            font-family: "JetBrains Mono",monospace;
+        }
+        
+        label {
+            font-size: 24px;
+            color: black;
+        }
+        
+        input {
+            width: 250px; /* Makes inputs uniform in size */
+            padding: 12px; /* More padding for better readability */
+            font-size: 18px; 
+            border: 2px solid #444; /* Darker border for contrast */
+            border-radius: 10px; /* Soft rounded corners */
+            text-align: center;
+            display: block;
+            margin: 10px auto;
+            background-color: white;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            transition: all 0.3s ease-in-out; /* Smooth transition */
+        }
+        
+        input:focus {
+            border-color: #222; /* Darker border when focused */
+            box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3); /* Enhanced focus effect */
+            outline: none;
+        }
+        
+        p {
+            font-size: 28px;
+            color: black;
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+        }
+        h1{
+          text-align: center;
+        }

@@ -1,0 +1,39 @@
+.navbar {
+    width: 100%;
+    background-color: #000217;
+    position: fixed; /* Stays at the top */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensures it's above other content */
+    padding: 0;
+    transition: all 0.15s ease-out;
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Ensures horizontal layout */
+    justify-content: center; /* Centers items horizontally */
+    align-items: center;
+}
+
+.navbar li {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+	font-size: 15px;
+    padding: 20px 30px;
+    display: block;
+    text-align: center;
+}
+
+.navbar a:hover {
+    background-color: #22243b;
+    transition: all 0.15s ease-out;
+}

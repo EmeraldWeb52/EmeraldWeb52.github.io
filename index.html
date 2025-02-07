@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <noscript>Your browser does not support Javascript. Certain features may not work due to this.</noscript>
+    <title>Home</title>
+    <head>
+         <link rel="stylesheet" href="main.css">
+    </head>
+
+    
+    <body>
+        <div id="navbar"></div>
+        <script>
+            fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+        </script>
+    
+        <header>
+            <h2 id="header">Welcome to my website!</h2>
+        </header>
+
+        
+        <main>
+
+            <p>Math links</p>
+            <a href="distForm.html" style="display: block; text-align: center; font-size: 23px; text-decoration: none;"><button class="button button-2">Distance Formula</button></a>
+            <a href="triangleSolver.html" style="display: block; text-align: center; font-size: 23px; text-decoration: none;"><button class="button button-2">Triangle Side Finder</button></a>
+            
+        </main>
+
+    </body>
+</html>
+
