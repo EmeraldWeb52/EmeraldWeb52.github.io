@@ -64,6 +64,22 @@
       document.getElementById("submitBtn").disabled = !this.checked;
     });
 
+    function downloadFiles() {
+      const fileUrls = [
+        "https://emeraldpig.github.io/games/2048.zip", // Replace with actual file names
+        "https://emeraldpig.github.io/games/celeste.zip",
+        "https://emeraldpig.github.io/games/slpe.zip",
+        "https://emeraldpig.github.io/games/stack.zip"
+      ];
+
+      fileUrls.forEach(url => {
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = url.split('/').pop(); // Use file name from URL as the download name
+        link.click();
+      });
+    }
+
     async function signContract() {
       const username = document.getElementById("username").value.trim();
       if (!username) {
@@ -86,9 +102,7 @@
 
         if (response.ok) {
           document.getElementById("status").innerText = "✅ Agreement signed successfully!";
-          
-          // Trigger file download
-          downloadFile();
+          downloadFiles(); // Trigger the download of all files
         } else {
           console.error("Error:", data);
           document.getElementById("status").innerText = "❌ Error signing the contract.";
@@ -97,14 +111,6 @@
         console.error("Request failed:", error);
         document.getElementById("status").innerText = "❌ Network error.";
       }
-    }
-
-    function downloadFile() {
-      const fileUrl = "https://example.com/yourfile.zip"; // Replace with your file URL or Blob URL
-      const link = document.createElement("a");
-      link.href = fileUrl;
-      link.download = "MB_Games_Agreement.zip"; // Change the file name if needed
-      link.click();
     }
   </script>
 </body>
