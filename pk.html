@@ -52,9 +52,6 @@
   <p>Enter your product key to download the games.</p>
   
   <input type="text" id="productKey" placeholder="Enter product key">
-  <label>
-    <input type="checkbox" id="tosAgree"> I agree to the Terms of Service
-  </label>
   <button onclick="validateKey()">Validate and Download</button>
   
   <div id="errorMessage" class="error"></div>
@@ -101,7 +98,7 @@
       errorMessage.style.color = "green";
       
       setTimeout(() => {
-        window.location.href = "https://emeraldpig52.github.io/tos.html"; // Redirect to agreement page
+        window.location.href = "https://emeraldpig.com/tos.html"; // Redirect to agreement page
       }, 1000);
       
     } else {
