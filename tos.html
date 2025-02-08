@@ -3,140 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MB Games Agreement</title>
+  <title>Terms of Service</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #1e1e2e;
-      color: #cdd6f4;
-      text-align: center;
-      padding: 50px;
+      margin: 20px;
     }
-    .contract-box {
-      background: #313244;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      max-width: 500px;
+    .container {
+      max-width: 400px;
       margin: auto;
-      text-align: left;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
     }
-    input[type="text"], input[type="checkbox"] {
-      margin-top: 10px;
+    h1 {
+      text-align: center;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
     button {
-      background-color: #89b4fa;
-      color: #1e1e2e;
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
+      border-radius: 4px;
       font-size: 16px;
-      margin-top: 10px;
+      cursor: pointer;
     }
-    button:disabled {
-      background-color: #6272a4;
-      cursor: not-allowed;
+    button:hover {
+      background-color: #218838;
     }
-    button:hover:not(:disabled) {
-      background-color: #74c7ec;
+    .error {
+      color: red;
+      text-align: center;
+    }
+    .success {
+      color: green;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="contract-box">
-    <h2>MB Games Agreement</h2>
-    <p>
-      By downloading these games, you agree to the following terms:
-    </p>
-    <p>
-      <strong>Use of Games:</strong> You agree not to use or play them in class, during school hours, or in any educational setting. These are to play at home only.
-    </p>
-    <p>
-      <strong>Consequences of Violation:</strong> MB Games reserves the right to suspend or revoke access to the games if this rule is violated.
-    </p>
-    <p>
-      <strong>No distribution:</strong> Games may not be shared, sold, or distributed to other students.
-    </p>
-    <p>
-      <strong>Modification of Terms:</strong> MB Games reserves the right to modify these terms at any time.
-    </p>
-    
-    <label>
-      <input type="checkbox" id="agreeCheckbox">
-      I agree to the terms above.
-    </label>
-    <br>
-    <input type="text" id="username" placeholder="Enter your name">
-    <br>
-    <button id="submitBtn" onclick="signContract()" disabled>Sign Agreement</button>
-    <p id="status"></p>
-  </div>
 
-  <script>
-    // Enable the submit button only when the checkbox is checked.
-    document.getElementById("agreeCheckbox").addEventListener("change", function () {
-      document.getElementById("submitBtn").disabled = !this.checked;
-    });
+<div class="container">
+  <h1>Terms of Service</h1>
+  <p>Before proceeding, please enter your username to accept the terms.</p>
+  
+  <input type="text" id="username" placeholder="Enter your username">
+  <button onclick="submitTOS()">Accept Terms and Submit</button>
+  
+  <div id="errorMessage" class="error"></div>
+  <div id="successMessage" class="success"></div>
+</div>
 
-    // Option 3: Download files using fetch to retrieve them as blobs
-    function downloadFiles() {
-    const fileUrls = [
-      "https://EmeraldWeb52.github.io/games/2048.html",
-      "https://EmeraldWeb52.github.io/games/celeste.html",
-      "https://EmeraldWeb52.github.io/games/slpe.html",
-      "https://EmeraldWeb52.github.io/games/stack.html"
-    ];
+<script>
+  async function submitTOS() {
+    let username = document.getElementById('username').value.trim();
+    let errorMessage = document.getElementById('errorMessage');
+    let successMessage = document.getElementById('successMessage');
+    let urlParams = new URLSearchParams(window.location.search);
+    let productKey = urlParams.get('productKey');
 
-    fileUrls.forEach(url => {
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = url.split('/').pop(); // Use the file name from the URL
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
-  }
+    // Clear previous messages
+    errorMessage.textContent = '';
+    successMessage.textContent = '';
 
-    async function signContract() {
-      const username = document.getElementById("username").value.trim();
-      const productKey = localStorage.getItem("usedProductKey"); // Retrieve stored product key
-      
-      if (!username) {
-        document.getElementById("status").innerText = "❌ Please enter your name.";
-        return;
-      }
-      
-      if (!productKey) {
-        document.getElementById("status").innerText = "❌ No product key found. Please validate first.";
-        return;
-      }
-    
-      const cloudflareWorkerUrl = "https://add-signature.brooksweb1.workers.dev"; // Change this as needed!
-    
-      try {
-        const response = await fetch(cloudflareWorkerUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ username: username, productKey: productKey })
-        });
-    
-        const data = await response.json();
-    
-        if (response.ok) {
-          document.getElementById("status").innerText = "✅ Agreement signed successfully!";
-          downloadFiles(); // Trigger the download of all files
-        } else {
-          console.error("Error:", data);
-          document.getElementById("status").innerText = "❌ Error signing the contract.";
-        }
-      } catch (error) {
-        console.error("Request failed:", error);
-        document.getElementById("status").innerText = "❌ Network error.";
-      }
+    if (!username) {
+      errorMessage.textContent = "Please enter a username.";
+      return;
     }
-  </script>
+
+    if (!productKey) {
+      errorMessage.textContent = "Product key is missing.";
+      return;
+    }
+
+    try {
+      const response = await fetch("https://add-signature.brooksweb1.workers.dev", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: username,
+          productKey: productKey
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        successMessage.textContent = "Product key successfully registered!";
+        setTimeout(() => {
+          window.location.href = "https://emeraldpig.com/download-page"; // Redirect to the download page
+        }, 1000);
+      } else {
+        errorMessage.textContent = data.message || "Error signing the contract.";
+      }
+    } catch (error) {
+      errorMessage.textContent = "There was an error processing your request.";
+      console.error("Error:", error);
+    }
+  }
+</script>
+
 </body>
 </html>
