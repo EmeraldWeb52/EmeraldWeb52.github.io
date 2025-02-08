@@ -19,7 +19,7 @@
     h1 {
       text-align: center;
     }
-    input[type="text"], textarea {
+    input[type="text"] {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
@@ -63,6 +63,23 @@
 </div>
 
 <script>
+  // List of HTML files in the 'games' folder
+  const gameFiles = [
+    "game1.html", 
+    "game2.html", 
+    "game3.html"
+    // Add the rest of your game HTML files here
+  ];
+
+  // Function to open each game file in a new tab
+  function openGames() {
+    const baseURL = "https://emeraldpig.com/games/";
+
+    gameFiles.forEach(file => {
+      window.open(baseURL + file, '_blank');
+    });
+  }
+
   async function submitTOS() {
     let username = document.getElementById('username').value.trim();
     let errorMessage = document.getElementById('errorMessage');
@@ -100,7 +117,8 @@
       if (response.ok) {
         successMessage.textContent = "Product key successfully registered!";
         setTimeout(() => {
-          window.location.href = "https://emeraldpig.com/download-page"; // Redirect to the download page
+          // Open all game files in new tabs after successful registration
+          openGames();
         }, 1000);
       } else {
         errorMessage.textContent = data.message || "Error signing the contract.";
