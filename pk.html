@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Key Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .error {
+      color: red;
+      text-align: center;
+    }
+    .tos {
+      margin-top: 20px;
+    }
+    .tos p {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Product Key Validation</h1>
+  <p>Enter your product key to download the games.</p>
+  
+  <input type="text" id="productKey" placeholder="Enter product key">
+  <button onclick="validateKey()">Validate and Download</button>
+  
+  <div id="errorMessage" class="error"></div>
+
+  <!-- Terms of Service Section -->
+  <div class="tos">
+    <p>
+      By downloading these games, you agree to the following terms:
+      <br>
+      <strong>Use of Games:</strong>You agree not to use or play them in class, during school hours, or in any educational setting. These are to play at home only.
+      <br>
+      <strong>Consequences of Violation:</strong> MB Games reserves the right to suspend or revoke access to the games if this rule is violated.
+      <br>
+      <strong>No distribution:</strong> Games may not be shared, sold, or distributed to other students.
+      <br>
+      <strong>Modification of Terms:</strong> MB Games reserves the right to modify these terms at any time.
+    </p>
+    
+    <input type="checkbox" id="tosAgree">
+    <label for="tosAgree">I agree to the Terms of Service.</label>
+  </div>
+</div>
+
+<script>
+  let validKeys = [
+    "X7#p8qZ3Bz",
+    "T1w@6mLr5Y",
+    "F!v9hPq8@X",
+    "Wb$3ZgR2iK",
+    "U3tP8d!mV6",
+    "K#1xJ8cQzN",
+    "R9oF@4lGzD",
+    "7sBzL1#2mT",
+    "I!hX9P0lRb",
+    "Jz$w6Q2rA5",
+    "T4n#V8iZ3Y",
+    "M1@fL6hJ9K",
+    "P2dB#q3oZ7",
+    "Y7zGmQ1!pL",
+    "C8wA3nF5X9",
+    "D#8oQ6zK0R",
+    "V4pFzJ1@8N",
+    "E3tL5gH#9Y",
+    "B2wZqT7!R0",
+    "H6xM1Yj9!L"
+  ];
+
+  function validateKey() {
+    let productKey = document.getElementById('productKey').value;
+    let tosAgree = document.getElementById('tosAgree').checked;
+    let errorMessage = document.getElementById('errorMessage');
+    
+    if (!tosAgree) {
+      errorMessage.textContent = "You must agree to the Terms of Service to proceed.";
+      errorMessage.style.color = "red";
+      return;
+    }
+    
+    if (validKeys.includes(productKey)) {
+      errorMessage.textContent = "Valid key, redirecting...";
+      window.location.href="https://emeraldpig52.github.io/tos.html"
+      errorMessage.style.color = "green";
+      
+      // Files to download
+      
+    } else {
+      errorMessage.textContent = "Invalid product key. Please try again.";
+      errorMessage.style.color = "red";
+    }
+  }
+</script>
+
+</body>
+</html>
