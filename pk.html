@@ -43,6 +43,10 @@
       color: red;
       text-align: center;
     }
+    .success {
+      color: green;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -55,32 +59,46 @@
   <button onclick="validateKey()">Validate and Download</button>
   
   <div id="errorMessage" class="error"></div>
+  <div id="successMessage" class="success"></div>
 </div>
 
 <script>
-  let validKeys = [
-    "X7#p8qZ3Bz", "T1w@6mLr5Y", "F!v9hPq8@X", "Wb$3ZgR2iK", "U3tP8d!mV6",
-    "K#1xJ8cQzN", "R9oF@4lGzD", "7sBzL1#2mT", "I!hX9P0lRb", "Jz$w6Q2rA5",
-    "T4n#V8iZ3Y", "M1@fL6hJ9K", "P2dB#q3oZ7", "Y7zGmQ1!pL", "C8wA3nF5X9",
-    "D#8oQ6zK0R", "V4pFzJ1@8N", "E3tL5gH#9Y", "B2wZqT7!R0", "H6xM1Yj9!L"
-  ];
-
-  function validateKey() {
+  async function validateKey() {
     let productKey = document.getElementById('productKey').value.trim();
     let errorMessage = document.getElementById('errorMessage');
+    let successMessage = document.getElementById('successMessage');
 
-    if (validKeys.includes(productKey)) {
-      localStorage.setItem("usedProductKey", productKey); // Store the valid product key
-      errorMessage.textContent = "Valid key, redirecting...";
-      errorMessage.style.color = "green";
-      
-      setTimeout(() => {
-        window.location.href = "https://emeraldpig.com/tos.html"; // Redirect to agreement page
-      }, 1000);
-      
-    } else {
-      errorMessage.textContent = "Invalid product key. Please try again.";
-      errorMessage.style.color = "red";
+    // Clear previous messages
+    errorMessage.textContent = '';
+    successMessage.textContent = '';
+
+    if (!productKey) {
+      errorMessage.textContent = "Please enter a product key.";
+      return;
+    }
+
+    try {
+      const response = await fetch("https://add-signature.brooksweb1.workers.dev", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ productKey: productKey })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        successMessage.textContent = "Valid key, redirecting to the agreement page...";
+        setTimeout(() => {
+          window.location.href = "https://emeraldpig.com/tos.html"; // Redirect to agreement page
+        }, 1000);
+      } else {
+        errorMessage.textContent = data.message || "Invalid product key. Please try again.";
+      }
+    } catch (error) {
+      errorMessage.textContent = "There was an error validating the product key.";
+      console.error("Error:", error);
     }
   }
 </script>
