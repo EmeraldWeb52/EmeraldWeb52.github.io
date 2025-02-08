@@ -91,28 +91,29 @@
   ];
 
   function validateKey() {
-    let productKey = document.getElementById('productKey').value;
-    let tosAgree = document.getElementById('tosAgree').checked;
-    let errorMessage = document.getElementById('errorMessage');
-    
-    if (!tosAgree) {
-      errorMessage.textContent = "You must agree to the Terms of Service to proceed.";
-      errorMessage.style.color = "red";
-      return;
-    }
-    
-    if (validKeys.includes(productKey)) {
-      errorMessage.textContent = "Valid key, redirecting...";
-      window.location.href="https://emeraldpig52.github.io/tos.html"
-      errorMessage.style.color = "green";
-      
-      // Files to download
-      
-    } else {
-      errorMessage.textContent = "Invalid product key. Please try again.";
-      errorMessage.style.color = "red";
-    }
+  let productKey = document.getElementById('productKey').value;
+  let tosAgree = document.getElementById('tosAgree').checked;
+  let errorMessage = document.getElementById('errorMessage');
+
+  if (!tosAgree) {
+    errorMessage.textContent = "You must agree to the Terms of Service to proceed.";
+    errorMessage.style.color = "red";
+    return;
   }
+
+  if (validKeys.includes(productKey)) {
+    localStorage.setItem("usedProductKey", productKey); // Store the valid product key
+    errorMessage.textContent = "Valid key, redirecting...";
+    errorMessage.style.color = "green";
+    
+    window.location.href = "https://emeraldpig52.github.io/tos.html"; // Redirect to agreement page
+
+  } else {
+    errorMessage.textContent = "Invalid product key. Please try again.";
+    errorMessage.style.color = "red";
+  }
+}
+
 </script>
 
 </body>
