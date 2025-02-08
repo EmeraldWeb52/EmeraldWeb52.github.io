@@ -19,7 +19,7 @@
     h1 {
       text-align: center;
     }
-    input[type="text"], input[type="checkbox"] {
+    input[type="text"] {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
@@ -59,38 +59,15 @@
 
 <script>
   let validKeys = [
-    "X7#p8qZ3Bz",
-    "T1w@6mLr5Y",
-    "F!v9hPq8@X",
-    "Wb$3ZgR2iK",
-    "U3tP8d!mV6",
-    "K#1xJ8cQzN",
-    "R9oF@4lGzD",
-    "7sBzL1#2mT",
-    "I!hX9P0lRb",
-    "Jz$w6Q2rA5",
-    "T4n#V8iZ3Y",
-    "M1@fL6hJ9K",
-    "P2dB#q3oZ7",
-    "Y7zGmQ1!pL",
-    "C8wA3nF5X9",
-    "D#8oQ6zK0R",
-    "V4pFzJ1@8N",
-    "E3tL5gH#9Y",
-    "B2wZqT7!R0",
-    "H6xM1Yj9!L"
+    "X7#p8qZ3Bz", "T1w@6mLr5Y", "F!v9hPq8@X", "Wb$3ZgR2iK", "U3tP8d!mV6",
+    "K#1xJ8cQzN", "R9oF@4lGzD", "7sBzL1#2mT", "I!hX9P0lRb", "Jz$w6Q2rA5",
+    "T4n#V8iZ3Y", "M1@fL6hJ9K", "P2dB#q3oZ7", "Y7zGmQ1!pL", "C8wA3nF5X9",
+    "D#8oQ6zK0R", "V4pFzJ1@8N", "E3tL5gH#9Y", "B2wZqT7!R0", "H6xM1Yj9!L"
   ];
 
   function validateKey() {
     let productKey = document.getElementById('productKey').value.trim();
-    let tosAgree = document.getElementById('tosAgree').checked;
     let errorMessage = document.getElementById('errorMessage');
-
-    if (!tosAgree) {
-      errorMessage.textContent = "You must agree to the Terms of Service to proceed.";
-      errorMessage.style.color = "red";
-      return;
-    }
 
     if (validKeys.includes(productKey)) {
       localStorage.setItem("usedProductKey", productKey); // Store the valid product key
