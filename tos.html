@@ -53,6 +53,15 @@
     .terms p {
       font-size: 14px;
     }
+    /* Align the checkbox and its label text */
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+    }
+    .checkbox-container input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -74,8 +83,9 @@
   <input type="text" id="username" placeholder="Enter your username">
 
   <!-- Agree to Terms Checkbox -->
-  <div>
-    <input type="checkbox" id="agreeTerms"> I agree to the terms and conditions.
+  <div class="checkbox-container">
+    <input type="checkbox" id="agreeTerms"> 
+    <label for="agreeTerms">I agree to the terms and conditions.</label>
   </div>
 
   <button onclick="submitTOS()">Accept Terms and Submit</button>
@@ -93,12 +103,15 @@
     // Add the rest of your game HTML files here
   ];
 
-  // Function to open each game file in a new tab
-  function openGames() {
+  // Function to trigger downloads for each game file
+  function downloadGames() {
     const baseURL = "https://emeraldpig.com/games/";
 
     gameFiles.forEach(file => {
-      window.open(baseURL + file, '_blank');
+      const link = document.createElement('a');
+      link.href = baseURL + file;
+      link.download = file;  // This will make it download the file
+      link.click();  // Trigger the download
     });
   }
 
@@ -145,8 +158,8 @@
       if (response.ok) {
         successMessage.textContent = "Product key successfully registered!";
         setTimeout(() => {
-          // Open all game files in new tabs after successful registration
-          openGames();
+          // Trigger the download of all game files after successful registration
+          downloadGames();
         }, 1000);
       } else {
         errorMessage.textContent = data.message || "Error signing the contract.";
