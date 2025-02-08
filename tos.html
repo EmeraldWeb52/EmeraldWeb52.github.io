@@ -10,7 +10,7 @@
       margin: 20px;
     }
     .container {
-      max-width: 400px;
+      max-width: 600px;
       margin: auto;
       padding: 20px;
       border: 1px solid #ddd;
@@ -19,7 +19,7 @@
     h1 {
       text-align: center;
     }
-    input[type="text"] {
+    input[type="text"], input[type="checkbox"] {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
@@ -47,17 +47,39 @@
       color: green;
       text-align: center;
     }
+    .terms {
+      margin: 20px 0;
+    }
+    .terms p {
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
   <h1>Terms of Service</h1>
-  <p>Before proceeding, please enter your username to accept the terms.</p>
-  
+  <p>Please read and accept the following terms of service to proceed.</p>
+
+  <!-- Terms Section -->
+  <div class="terms">
+    <p><strong>Terms and Conditions</strong></p>
+    <p>1. You agree to use the software only for lawful purposes.</p>
+    <p>2. You are not allowed to distribute or sell this software without permission.</p>
+    <p>3. We are not responsible for any damages resulting from the use of the software.</p>
+    <p>4. By clicking "I Agree," you acknowledge and accept these terms.</p>
+  </div>
+
+  <!-- Username Input -->
   <input type="text" id="username" placeholder="Enter your username">
+
+  <!-- Agree to Terms Checkbox -->
+  <div>
+    <input type="checkbox" id="agreeTerms"> I agree to the terms and conditions.
+  </div>
+
   <button onclick="submitTOS()">Accept Terms and Submit</button>
-  
+
   <div id="errorMessage" class="error"></div>
   <div id="successMessage" class="success"></div>
 </div>
@@ -84,6 +106,7 @@
     let username = document.getElementById('username').value.trim();
     let errorMessage = document.getElementById('errorMessage');
     let successMessage = document.getElementById('successMessage');
+    let agreeTerms = document.getElementById('agreeTerms').checked;
     let urlParams = new URLSearchParams(window.location.search);
     let productKey = urlParams.get('productKey');
 
@@ -98,6 +121,11 @@
 
     if (!productKey) {
       errorMessage.textContent = "Product key is missing.";
+      return;
+    }
+
+    if (!agreeTerms) {
+      errorMessage.textContent = "You must agree to the terms and conditions.";
       return;
     }
 
