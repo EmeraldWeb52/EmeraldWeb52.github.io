@@ -53,7 +53,6 @@
     .terms p {
       font-size: 14px;
     }
-    /* Align the checkbox and its label text */
     .checkbox-container {
       display: flex;
       align-items: center;
@@ -70,7 +69,6 @@
   <h1>Terms of Service</h1>
   <p>Please read and accept the following terms of service to proceed.</p>
 
-  <!-- Terms Section -->
   <div class="terms">
     <p><strong>Terms and Conditions</strong></p>
     <p>1. You agree to use the software only for lawful purposes.</p>
@@ -95,27 +93,6 @@
 </div>
 
 <script>
-  // List of HTML files in the 'games' folder
-  const gameFiles = [
-    "celeste.html", 
-    "2048.html", 
-    "slpe.html",
-    "stack.html"
-    // Add the rest of your game HTML files here
-  ];
-
-  // Function to trigger downloads for each game file
-  function downloadGames() {
-    const baseURL = "https://emeraldpig.com/games/";
-
-    gameFiles.forEach(file => {
-      const link = document.createElement('a');
-      link.href = baseURL + file;
-      link.download = file;  // This will make it download the file
-      link.click();  // Trigger the download
-    });
-  }
-
   async function submitTOS() {
     let username = document.getElementById('username').value.trim();
     let errorMessage = document.getElementById('errorMessage');
@@ -159,8 +136,7 @@
       if (response.ok) {
         successMessage.textContent = "Product key successfully registered!";
         setTimeout(() => {
-          // Trigger the download of all game files after successful registration
-          downloadGames();
+          downloadFiles();
         }, 1000);
       } else {
         errorMessage.textContent = data.message || "Error signing the contract.";
@@ -169,6 +145,27 @@
       errorMessage.textContent = "There was an error processing your request.";
       console.error("Error:", error);
     }
+  }
+
+  function downloadFiles() {
+    // List of HTML files to download
+    const files = [
+      "https://emeraldpig.com/games/celeste.html",
+      "https://emeraldpig.com/games/slpe.html",
+      "https://emeraldpig.com/games/2048.html",
+      "https://emeraldpig.com/games/stack.html"
+    ];
+
+    files.forEach(file => {
+      // Create an anchor element for each file
+      const a = document.createElement('a');
+      a.href = file;
+      a.download = file.split('/').pop();  // Use the file name for the download
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
   }
 </script>
 
