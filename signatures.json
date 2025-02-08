@@ -8,5 +8,10 @@
     "name": "Brooks",
     "productKey": "ABC123XYZ",
     "timestamp": "2025-02-08T22:24:36.906Z"
+  },
+  {
+    "name": "Brooks",
+    "productKey": "DEF456XYZ",
+    "timestamp": "2025-02-08T23:00:42.176Z"
   }
 ]
