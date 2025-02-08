@@ -74,66 +74,81 @@
   </div>
 
   <script>
+    // Enable the submit button only when the checkbox is checked.
     document.getElementById("agreeCheckbox").addEventListener("change", function () {
       document.getElementById("submitBtn").disabled = !this.checked;
     });
 
-    function downloadFiles() {
+    // Option 3: Download files using fetch to retrieve them as blobs
+    async function downloadFiles() {
       const fileUrls = [
-        "https://EmeraldWeb52.github.io/games/2048.html", // Replace with actual file names
+        "https://EmeraldWeb52.github.io/games/2048.html",
         "https://EmeraldWeb52.github.io/games/celeste.html",
         "https://EmeraldWeb52.github.io/games/slpe.html",
         "https://EmeraldWeb52.github.io/games/stack.html"
       ];
 
-      fileUrls.forEach(url => {
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = url.split('/').pop(); // Use file name from URL as the download name
-        link.click();
-      });
+      for (const url of fileUrls) {
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            console.error(`Failed to fetch ${url}: ${response.statusText}`);
+            continue;
+          }
+          const blob = await response.blob();
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = url.split('/').pop(); // Use the file name from the URL
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          // Revoke the object URL after a short delay to free up memory
+          setTimeout(() => URL.revokeObjectURL(link.href), 100);
+        } catch (error) {
+          console.error("Download failed for:", url, error);
+        }
+      }
     }
 
     async function signContract() {
-    const username = document.getElementById("username").value.trim();
-    const productKey = localStorage.getItem("usedProductKey"); // Retrieve stored product key
-    
-    if (!username) {
-      document.getElementById("status").innerText = "❌ Please enter your name.";
-      return;
-    }
-    
-    if (!productKey) {
-      document.getElementById("status").innerText = "❌ No product key found. Please validate first.";
-      return;
-    }
-  
-    const cloudflareWorkerUrl = "https://add-signature.brooksweb1.workers.dev"; // Change this!
-  
-    try {
-      const response = await fetch(cloudflareWorkerUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ username: username, productKey: productKey })
-      });
-  
-      const data = await response.json();
-  
-      if (response.ok) {
-        document.getElementById("status").innerText = "✅ Agreement signed successfully!";
-        downloadFiles(); // Trigger the download of all files
-      } else {
-        console.error("Error:", data);
-        document.getElementById("status").innerText = "❌ Error signing the contract.";
+      const username = document.getElementById("username").value.trim();
+      const productKey = localStorage.getItem("usedProductKey"); // Retrieve stored product key
+      
+      if (!username) {
+        document.getElementById("status").innerText = "❌ Please enter your name.";
+        return;
       }
-    } catch (error) {
-      console.error("Request failed:", error);
-      document.getElementById("status").innerText = "❌ Network error.";
+      
+      if (!productKey) {
+        document.getElementById("status").innerText = "❌ No product key found. Please validate first.";
+        return;
+      }
+    
+      const cloudflareWorkerUrl = "https://add-signature.brooksweb1.workers.dev"; // Change this as needed!
+    
+      try {
+        const response = await fetch(cloudflareWorkerUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ username: username, productKey: productKey })
+        });
+    
+        const data = await response.json();
+    
+        if (response.ok) {
+          document.getElementById("status").innerText = "✅ Agreement signed successfully!";
+          downloadFiles(); // Trigger the download of all files
+        } else {
+          console.error("Error:", data);
+          document.getElementById("status").innerText = "❌ Error signing the contract.";
+        }
+      } catch (error) {
+        console.error("Request failed:", error);
+        document.getElementById("status").innerText = "❌ Network error.";
+      }
     }
-  }
-
   </script>
 </body>
 </html>
