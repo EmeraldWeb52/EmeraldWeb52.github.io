@@ -19,7 +19,7 @@
     h1 {
       text-align: center;
     }
-    input[type="text"] {
+    input[type="text"], input[type="checkbox"] {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
@@ -43,13 +43,6 @@
       color: red;
       text-align: center;
     }
-    .tos {
-      margin-top: 20px;
-    }
-    .tos p {
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
   </style>
 </head>
 <body>
@@ -59,11 +52,12 @@
   <p>Enter your product key to download the games.</p>
   
   <input type="text" id="productKey" placeholder="Enter product key">
+  <label>
+    <input type="checkbox" id="tosAgree"> I agree to the Terms of Service
+  </label>
   <button onclick="validateKey()">Validate and Download</button>
   
   <div id="errorMessage" class="error"></div>
-
-  <!-- Terms of Service Section -->
 </div>
 
 <script>
@@ -91,29 +85,30 @@
   ];
 
   function validateKey() {
-  let productKey = document.getElementById('productKey').value;
-  let tosAgree = document.getElementById('tosAgree').checked;
-  let errorMessage = document.getElementById('errorMessage');
+    let productKey = document.getElementById('productKey').value.trim();
+    let tosAgree = document.getElementById('tosAgree').checked;
+    let errorMessage = document.getElementById('errorMessage');
 
-  if (!tosAgree) {
-    errorMessage.textContent = "You must agree to the Terms of Service to proceed.";
-    errorMessage.style.color = "red";
-    return;
+    if (!tosAgree) {
+      errorMessage.textContent = "You must agree to the Terms of Service to proceed.";
+      errorMessage.style.color = "red";
+      return;
+    }
+
+    if (validKeys.includes(productKey)) {
+      localStorage.setItem("usedProductKey", productKey); // Store the valid product key
+      errorMessage.textContent = "Valid key, redirecting...";
+      errorMessage.style.color = "green";
+      
+      setTimeout(() => {
+        window.location.href = "https://emeraldpig52.github.io/tos.html"; // Redirect to agreement page
+      }, 1000);
+      
+    } else {
+      errorMessage.textContent = "Invalid product key. Please try again.";
+      errorMessage.style.color = "red";
+    }
   }
-
-  if (validKeys.includes(productKey)) {
-    localStorage.setItem("usedProductKey", productKey); // Store the valid product key
-    errorMessage.textContent = "Valid key, redirecting...";
-    errorMessage.style.color = "green";
-    
-    window.location.href = "https://emeraldpig52.github.io/tos.html"; // Redirect to agreement page
-
-  } else {
-    errorMessage.textContent = "Invalid product key. Please try again.";
-    errorMessage.style.color = "red";
-  }
-}
-
 </script>
 
 </body>
