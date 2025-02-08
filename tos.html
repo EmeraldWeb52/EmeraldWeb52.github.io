@@ -80,35 +80,23 @@
     });
 
     // Option 3: Download files using fetch to retrieve them as blobs
-    async function downloadFiles() {
-      const fileUrls = [
-        "https://EmeraldWeb52.github.io/games/2048.html",
-        "https://EmeraldWeb52.github.io/games/celeste.html",
-        "https://EmeraldWeb52.github.io/games/slpe.html",
-        "https://EmeraldWeb52.github.io/games/stack.html"
-      ];
+    function downloadFiles() {
+    const fileUrls = [
+      "https://EmeraldWeb52.github.io/games/2048.html",
+      "https://EmeraldWeb52.github.io/games/celeste.html",
+      "https://EmeraldWeb52.github.io/games/slpe.html",
+      "https://EmeraldWeb52.github.io/games/stack.html"
+    ];
 
-      for (const url of fileUrls) {
-        try {
-          const response = await fetch(url);
-          if (!response.ok) {
-            console.error(`Failed to fetch ${url}: ${response.statusText}`);
-            continue;
-          }
-          const blob = await response.blob();
-          const link = document.createElement("a");
-          link.href = URL.createObjectURL(blob);
-          link.download = url.split('/').pop(); // Use the file name from the URL
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          // Revoke the object URL after a short delay to free up memory
-          setTimeout(() => URL.revokeObjectURL(link.href), 100);
-        } catch (error) {
-          console.error("Download failed for:", url, error);
-        }
-      }
-    }
+    fileUrls.forEach(url => {
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = url.split('/').pop(); // Use the file name from the URL
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  }
 
     async function signContract() {
       const username = document.getElementById("username").value.trim();
