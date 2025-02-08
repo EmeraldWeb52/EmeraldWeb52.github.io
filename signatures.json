@@ -13,5 +13,10 @@
     "name": "Brooks",
     "productKey": "DEF456XYZ",
     "timestamp": "2025-02-08T23:00:42.176Z"
+  },
+  {
+    "name": "BROOKS",
+    "productKey": "JKL012XYZ",
+    "timestamp": "2025-02-08T23:05:37.401Z"
   }
 ]
